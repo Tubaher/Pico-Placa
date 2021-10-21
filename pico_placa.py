@@ -139,8 +139,15 @@ class Car():
         # if all arguments are verified
         if not issue:
             last_digit = self.plate[-1]
-
-
+            if self.pico_day(last_digit):
+                if self.pico_time():
+                    allowed = False
+        
+        else:
+            print('Check the format for arguments and repeat.')
+            allowed = False
+        
+        return allowed
 
         
 
