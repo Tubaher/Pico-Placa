@@ -19,7 +19,7 @@ class Plate():
         self.plate_number = plate_number.lower()
 
     def validate_plate(self):
-        """ Validate if the plate has the format 3 letters (no ñ-Ñ) and 3 numbers. 
+        """ Validate if the plate has the format 3 letters (no ñ) and 4 numbers. 
             input : self
             output : boolean"""
         is_valid = True
@@ -27,8 +27,8 @@ class Plate():
         # check if the plate has the right length
         len_plate = len(self.plate_number)
         # it shouldn't be more or less than six numbers
-        if (len_plate != 6):
-            print(f'The lenght of the plate number is more than 6. It has {len_plate} numbers!.')
+        if (len_plate != 7):
+            print(f'The lenght of the plate number is more or less than 7. It has {len_plate} numbers!.')
             is_valid = False
 
         else:
@@ -38,22 +38,27 @@ class Plate():
                     is_letter = (number.isalpha() and number != 'ñ')
                     # break condition and suggestion about the error
                     if not is_letter:
-                        print('The plate has not a valid format. Remember LLL### with no ñ. There is not 3 letters.')
+                        print('The plate has not a valid format. Remember LLL#### with no ñ. There is not 3 letters.')
                         is_valid = False
                         break 
                 else:
-                    # last 3 characters should be numbers
+                    # last 4 characters should be numbers
                     is_number = number.isnumeric()
                     # break condition and suggestion about the error
                     if not is_number:
-                        print('The plate has not a valid format. Remember LLL### with no ñ. There is not 3 numbers.')
+                        print('The plate has not a valid format. Remember LLL#### with no ñ. There is not 4 numbers.')
                         is_valid = False
                         break
         return is_valid
 
+class Car():
+    def __init__(self, date, time, plate) -> None:
+        self.date = date
+        self.time = time
+        self.plate = plate
 
+    def on_road(self):
 
-            
 
 
 
