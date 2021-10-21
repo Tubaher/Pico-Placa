@@ -117,8 +117,28 @@ class Car():
 
         return is_pico_day
 
+    def pico_time(self):
+        """ Check if the car at that time is in a restricted schedule """
 
-    
+        # control variable for restriction
+        restricted = False
+
+        # times for Pico&Placa in the morning
+        start_am = datetime.timedelta(hours= 7)
+        end_am = datetime.timedelta(hours= 9, minutes= 30)
+
+        # times for Pico&Placa at night
+        start_pm = datetime.timedelta(hours= 16)
+        end_pm = datetime.timedelta(hours= 19, minutes= 30)
+
+        # Desicion making for restriction
+        if self.time >= start_am and self.time <= end_am:
+            restricted = True
+        elif self.time >= start_pm and self.time <= end_pm:
+            restricted = True
+
+        return restricted
+
     def on_road(self):
         """ Check  if the car should be on the road or not
         according to Pico&Placa"""
@@ -139,7 +159,11 @@ class Car():
         # if all arguments are verified
         if not issue:
             last_digit = self.plate[-1]
+
+            # check if there is a restriction for that number today
             if self.pico_day(last_digit):
+
+                # check if the car is in the restricted schedule
                 if self.pico_time():
                     allowed = False
         
