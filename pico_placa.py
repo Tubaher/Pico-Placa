@@ -61,15 +61,32 @@ class Car():
         self.plate = plate
 
     def validate_date(self):
+        """ Validate if the given date is in the required format AA-mm-dd"""
+
+        # control validation
         validated = True
         try:
+            # from string to datetime
             self.date = datetime.datetime.strptime(self.date, '%A-%m-%d')
         except:
             validated = False
 
         return validated
 
+    def validate_time(self):
+        """ Validate if the given time is in the format required %H:%M """
+        
+        validated = True
+        try:
+            # from string to datetime
+            self.time = datetime.datetime.strptime(self.time, '%H:%M')
+        except:
+            validated = False
 
+        return validated
+
+    def on_road():
+        pass
 
 def main():
     args = parser.parse_args()
