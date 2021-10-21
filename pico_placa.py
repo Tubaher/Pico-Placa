@@ -173,14 +173,13 @@ class Car():
         
         return allowed
 
-        
-
-
-        pass
 
 def main():
     args = parser.parse_args()
-    print(True)
+    plate = Plate(args.plate_number)
+    car = Car(args.date, args.time, plate)
+
+    print(car.on_road())
 
 if __name__ == "__main__":
     main()
