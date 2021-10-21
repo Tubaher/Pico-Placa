@@ -1,5 +1,21 @@
 # Pico-Placa
 The following repository is an Pico & placa predictor made in python.
+
+Pico&Placa is a way to control the vehicle traffic in Quito. The following repository take all the rules exposed in
+https://revistas.uide.edu.ec/index.php/innova/article/view/300/309 which defines when a vehicle can be on the road or not.
+
+This rules are:
+restricted schedule: from 7:00 to 9:00, and from 16:00 to 19:30. \
+restricted vehicles according to the last digit in its license plate.
+
+Monday : 1,2
+Tuesday : 3,4
+Wednesday: 5,6
+Thursday: 7,8
+Friday: 9,0
+
+Vehicles that are between these rules are not allowed to be on the road.
+
 To test the code you will need to follow these steps:
 
 Install the dependencies:
