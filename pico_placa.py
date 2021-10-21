@@ -6,6 +6,7 @@ pico_placa,py <plate_number> <date> <time>"""
 
 
 import argparse
+import datetime
 from typing import Mapping
 
 parser = argparse.ArgumentParser(description='Determine if a car should be in the road based on Pico&Placa')
@@ -52,13 +53,21 @@ class Plate():
         return is_valid
 
 class Car():
+    """ Class to handle cars and their status on the road """
+
     def __init__(self, date, time, plate) -> None:
         self.date = date
         self.time = time
         self.plate = plate
 
-    def on_road(self):
+    def validate_date(self):
+        validated = True
+        try:
+            self.date = datetime.datetime.strptime(self.date, '%A-%m-%d')
+        except:
+            validated = False
 
+        return validated
 
 
 
