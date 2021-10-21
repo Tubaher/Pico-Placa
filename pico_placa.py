@@ -11,7 +11,7 @@ from typing import Mapping
 
 parser = argparse.ArgumentParser(description='Determine if a car should be in the road based on Pico&Placa.')
 parser.add_argument('plate_number', type=str, help='full number of the plate, seven characters. Three letters, four numbers.')
-parser.add_argument('date', type=str, help='date of the query in format Year-Month-Day.')
+parser.add_argument('date', type=str, help='date of the query in format Year_Month_Day.')
 parser.add_argument('time', type=str, help='time of the query in format Hour:Minute.')
 
 
@@ -61,15 +61,15 @@ class Car():
         self.plate = plate
 
     def validate_date(self):
-        """ Validate if the given date is in the required format AA-mm-dd"""
+        """ Validate if the given date is in the required format YY_mm_dd"""
 
         # control validation
         validated = True
         try:
             # from string to datetime
-            self.date = datetime.datetime.strptime(self.date, '%A-%m-%d')
+            self.date = datetime.datetime.strptime(self.date, '%Y_%m_%d')
         except:
-            print('The date is not in the right format %A-%m-%d')
+            print('The date is not in the right format %Y_%m_%d')
             validated = False
 
         return validated
@@ -124,12 +124,12 @@ class Car():
         restricted = False
 
         # times for Pico&Placa in the morning
-        start_am = datetime.timedelta(hours= 7)
-        end_am = datetime.timedelta(hours= 9, minutes= 30)
+        start_am = datetime.datetime.strptime('07:00', '%H:%M')
+        end_am = datetime.datetime.strptime('09:30', '%H:%M')
 
         # times for Pico&Placa at night
-        start_pm = datetime.timedelta(hours= 16)
-        end_pm = datetime.timedelta(hours= 19, minutes= 30)
+        start_pm = datetime.datetime.strptime('16:00', '%H:%M')
+        end_pm = datetime.datetime.strptime('19:30', '%H:%M')
 
         # Desicion making for restriction
         if self.time >= start_am and self.time <= end_am:
@@ -158,7 +158,7 @@ class Car():
 
         # if all arguments are verified
         if not issue:
-            last_digit = self.plate[-1]
+            last_digit = self.plate.plate_number[-1]
 
             # check if there is a restriction for that number today
             if self.pico_day(last_digit):
