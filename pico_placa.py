@@ -10,7 +10,7 @@ import datetime
 from typing import Mapping
 
 parser = argparse.ArgumentParser(description='Determine if a car should be in the road based on Pico&Placa.')
-parser.add_argument('plate_number', type=str, help='full number of the plate, seven characters. Three letters, four numbers.')
+parser.add_argument('plate_number', type=str, help='full number of the plate, seven characters. Three letters, four numbers wit no hyphen.')
 parser.add_argument('date', type=str, help='date of the query in format Year_Month_Day.')
 parser.add_argument('time', type=str, help='time of the query in format Hour:Minute.')
 
@@ -175,10 +175,14 @@ class Car():
 
 
 def main():
+    # collect arguments 
     args = parser.parse_args()
+    
+    # create instances
     plate = Plate(args.plate_number)
     car = Car(args.date, args.time, plate)
 
+    # print the result
     print(car.on_road())
 
 if __name__ == "__main__":
